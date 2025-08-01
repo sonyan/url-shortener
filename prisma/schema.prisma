@@ -1,0 +1,30 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  urls      Url[]
+  createdAt DateTime @default(now())
+}
+
+model Url {
+  id        String   @id @default(uuid())
+  original  String
+  slug      String   @unique
+  userId    String?  // Optional: anonymous URLs allowed
+  user      User?    @relation(fields: [userId], references: [id])
+  visits    Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([userId, visits]) // support dashboard query
+}
