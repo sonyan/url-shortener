@@ -74,11 +74,10 @@ docker run --env-file .env -p 3000:3000 url-shortener
 - `prisma/` - Prisma schema
 - `Dockerfile` & `docker-compose.yml` - Containerization
 
-## Notes for Reviewers
+## Notes
 
 - All environment variables are required for production and local use
 - Rate limiting is enforced on registration, sign-in, shorten, and redirect endpoints
-- The `.next` folder is excluded from git via `.gitignore`
 
 ---
 
